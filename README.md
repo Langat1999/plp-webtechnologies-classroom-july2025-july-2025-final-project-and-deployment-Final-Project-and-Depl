@@ -2,6 +2,7 @@
 ![alt text](Image.jpg)
 
 A quick-start project featuring three beginner-friendly AI-powered web applications with a Flask backend, static frontend, and optional payment integration. Includes asset optimization for performance.
+Check deployed webpages here: https://deluxe-fox-7cdb8c.netlify.app/
 
 ## Features
 
