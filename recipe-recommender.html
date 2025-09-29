@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recipe Recommender</title>
+
+  <!-- Favicon / App Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/partners.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/partners.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/partners.png" />
+  <meta name="theme-color" content="#111827" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- ...existing code... -->
+  <link rel="stylesheet" href="assets/css/style2.css">
+  <style>
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      #nav-menu {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      #nav-menu.show {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 10px 0;
+        z-index: 1000;
+      }
+
+      #nav-menu.show a {
+        display: block;
+        padding: 10px 20px;
+        text-align: center;
+      }
+    }
+
+    @media (min-width: 769px) {
+      #nav-menu {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+      }
+
+      .hamburger {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <picture>
+    <source srcset="assets/images/webp/recipe.webp" type="image/webp" />
+    <img src="assets/images/recipe.jpg" alt="Recipe Recommender Background" width="1920" height="1080"
+      style="position:fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; opacity:0.3;"
+      loading="eager" decoding="async">
+  </picture>
+
+  <header class="site-header">
+    <div class="containerNav">
+      <a class="logo" href="index.html">
+        <img src="assets/images/earth.png"
+          alt="Globe showing continents surrounded by blue oceans, symbolizing global unity and sustainability, set against a simple background with a calm and hopeful tone"
+          width="40" height="40" loading="eager" decoding="async" class="logo-image" />
+        Solutions
+      </a>
+
+      <!-- Hamburger toggle button -->
+      <button class="hamburger" id="menu-toggle" aria-label="Menu">&#9776;</button>
+
+
+      <nav id="nav-menu" aria-label="Primary Navigation">
+        <a id="nav-home" href="index.html">Home</a>
+        <a id="nav-sdg2" href="recipe-recommender.html">SDG 2</a>
+        <a id="nav-sdg3" href="mood-journal.html">SDG 3</a>
+        <a id="nav-sdg4" href="study-buddy.html">SDG 4</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="tag">SDG 2 — Zero Hunger</span>
+      <h1>Recipe Recommender — Simple Food Matcher</h1>
+      <p class="section-title">Pick ingredients, ask the backend for ideas, and show results as cards.</p>
+    </section>
+
+
+
+    <section class="card">
+      <div class="form-row">
+        <label for="ingredient-input">Type Ingredients (comma separated)</label>
+        <input type="text" id="ingredient-input" class="ingredient-input" placeholder="e.g. chicken, tomato, onion"
+          style="width:100%;padding:0.5rem;font-size:1rem;border-radius:8px;border:1px solid #ccc;">
+      </div>
+      <div class="form-row">
+        <button class="btn alt" id="fetch-recipe">Get Recipe</button>
+      </div>
+      <div class="grid" id="results"></div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; 2025 Jackson Mutiso Langat. All rights reserved.</p>
+        <div class="social-icons">
+          <a href="https://github.com/Langat1999" target="_blank">
+            <picture>
+              <source srcset="assets/images/icons/github.webp" type="image/webp" />
+              <img src="assets/images/icons/github.png" alt="GitHub" width="24" height="24" loading="lazy" />
+            </picture>
+          </a>
+          <a href="https://wa.me/254713809220" target="_blank">
+            <picture>
+              <source srcset="assets/images/icons/whatsapp-optimized.webp" type="image/webp" />
+              <img src="assets/images/icons/whatsapp.png" alt="WhatsApp" width="24" height="24" loading="lazy" />
+            </picture>
+          </a>
+
+          <a href="https://www.linkedin.com/in/jackson-langat-780942243" target="_blank">
+            <picture>
+              <source srcset="assets/images/icons/linkedin.webp" type="image/webp" />
+              <img src="assets/images/icons/linkedin.png" alt="LinkedIn" width="24" height="24" loading="lazy" />
+            </picture>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="assets/js/bundle.min.js" defer></script>
+
+  <section class="payment-section" style="margin: 20px 0; text-align: center;">
+  <section class="payment-section" style="margin: 20px 0; text-align: center;">
+    <h3>Support SDG 2 - Zero Hunger</h3>
+    <input type="email" id="paystack-email" placeholder="Enter your email" required style="padding:8px;border-radius:6px;">
+    <button id="paystack-pay-btn" class="btn">Pay Now (KES 1000)</button>
+  </section>
+
+  <script>
+    document.getElementById('paystack-pay-btn').addEventListener('click', async () => {
+      const email = document.getElementById('paystack-email').value.trim();
+      if (!email) {
+        alert('Please enter your email.');
+        return;
+      }
+      const button = document.getElementById('paystack-pay-btn');
+      button.disabled = true;
+      try {
+        const resp = await fetch('/create-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: 1000, email: email, currency: 'KES', description: 'Support SDG 2 - Zero Hunger' })
+        });
+        const data = await resp.json();
+        if (data.payment_url) {
+          window.location.href = data.payment_url;
+        } else {
+          alert(data.error || 'Payment initialization failed.');
+        }
+      } catch (err) {
+        alert('Payment request failed.');
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+  <script>
+    document.getElementById('fetch-recipe').addEventListener('click', async () => {
+      const input = document.getElementById('ingredient-input').value.trim();
+      const ingredients = input.split(',').map(x => x.trim()).filter(Boolean);
+      if (ingredients.length === 0) {
+        alert('Please enter at least one ingredient.');
+        return;
+      }
+      const button = document.getElementById('fetch-recipe');
+      button.disabled = true;
+      try {
+        const resp = await fetch('/api/recipes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ingredients })
+        });
+        const data = await resp.json();
+        const resultsContainer = document.getElementById('results');
+        resultsContainer.innerHTML = '';
+        if (data.recipes && Array.isArray(data.recipes)) {
+          data.recipes.forEach(r => {
+            const card = document.createElement('article');
+            card.className = 'card recipe-card';
+            card.innerHTML = `<h3>${r.title}</h3><p class="muted">${r.content}</p><small class="ingredients-hint">Made with: ${ingredients.join(', ')}</small>`;
+            resultsContainer.appendChild(card);
+          });
+        } else {
+          resultsContainer.innerHTML = '<div class="error-message">No recipes found.</div>';
+        }
+      } catch (err) {
+        alert('Failed to fetch recipe.');
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+
+</html>

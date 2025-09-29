@@ -1,0 +1,485 @@
+:root {
+  --brand-2: #00c2a8;
+  --shadow: 0 10px 24px rgba(0,0,0,.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-bottom: 0;
+  scroll-behavior: smooth;
+}
+
+#background-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  object-fit: cover;
+  filter: brightness(0.55);
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1080px;
+  padding: 24px 32px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: all 0.3s ease;
+}
+
+/* Respect reduced motion preferences to improve perceived load */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Limit transitions to interactive elements for better performance */
+.container a, .container button, .container .card {
+  transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+}
+
+.container button:hover,
+.container a:hover,
+.container .card:hover {
+  transform: translateY(-4px) scale(1.02);
+  opacity: 0.95;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header {
+  position: relative;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.containerNav {
+  max-width: 1080px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  flex-wrap: nowrap;
+}
+
+.containerNav .logo {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #ffffff;
+  text-decoration: none;
+  background: transparent;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  flex: 0 1 auto;
+}
+
+.containerNav .logo:hover {
+  color: #ffffff;
+}
+
+.logo-image {
+  height: auto;
+  width: 40px;
+  max-width: 100%;
+  display: block;
+}
+
+.containerNav #nav-menu {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+.containerNav a {
+  color: #ffffff;
+  text-decoration: none;
+  position: relative;
+  white-space: nowrap;
+  display: inline-block;
+  padding: 6px 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.containerNav a::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7f00ff, #00f0ff);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.containerNav a:hover {
+  color: #00f0ff;
+  text-shadow: 0 0 8px #7f00ff, 0 0 16px #00f0ff;
+  transform: translateY(-2px) scale(1.05);
+}
+
+.containerNav a:hover::before {
+  width: 80%;
+}
+
+.containerNav a.active {
+  color: #00f0ff;
+  text-shadow: 0 0 8px #7f00ff, 0 0 16px #00f0ff;
+}
+
+.containerNav a.active::before {
+  width: 80%;
+  background: linear-gradient(90deg, #00f0ff, #7f00ff);
+}
+
+.containerNav #nav-menu a {
+  opacity: 1;
+  transform: none;
+  /* animation removed for performance */
+}
+
+/* Removed nav animation delays for performance */
+
+@keyframes fadeInNav {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero {
+  padding: 80px 20px 60px;
+  max-width: 720px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 1; /* Changed from 0 to 1 to make visible immediately */
+  transform: translateY(0); /* Reset transform */
+  animation: none; /* Disable animation for immediate visibility */
+  background: inherit;
+  padding: 100px 20px 80px; /* Slightly increased padding */
+  border-radius: 12px; /* Added rounded corners */
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.4;
+  color: #eee; /* Changed to light color for better contrast */
+  white-space: normal; /* Allow wrapping */
+  overflow: visible; /* Show full text */
+  border-right: none; /* Removed typing cursor effect */
+  width: auto; /* Reset width */
+  animation: none; /* Disable typing animation */
+}
+
+/* Responsive adjustments for hero paragraph */
+@media (max-width: 768px) {
+  .hero p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero p {
+    font-size: 0.9rem;
+  }
+}
+
+.hero .btn {
+  align-self: center;
+  background-color: #3b82f6; /* Changed to solid blue for visibility */
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  opacity: 1; /* Make button visible */
+  transform: translateY(0); /* Reset transform */
+  animation: none; /* Disable animation */
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInHeroBtn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Additional animations for main page elements */
+.learn-more-container {
+  animation: fadeInUp 0.8s ease-out 1s both;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.site-footer {
+  animation: fadeInUp 0.8s ease-out 1.2s both;
+  background: inherit;
+  padding: 12px 0 6px 0 !important;
+}
+
+/* Card animations for main page */
+.card {
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+/* Staggered animations for better visual flow */
+.card:nth-child(1) { animation-delay: 0.4s; }
+.card:nth-child(2) { animation-delay: 0.6s; }
+.card:nth-child(3) { animation-delay: 0.8s; }
+.card:nth-child(4) { animation-delay: 1.0s; }
+
+/* Hide hamburger menu by default */
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Mobile view: Show hamburger and hide nav links only on index.html */
+@media (max-width: 768px) {
+  .containerNav {
+    flex-wrap: wrap;
+  }
+  #nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    background-color: rgba(0,0,0,0.9);
+    padding: 10px 16px;
+    border-radius: 12px;
+    margin-top: 12px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  .hamburger {
+    display: block;
+  }
+  #nav-menu.show {
+    display: flex;
+  }
+  #nav-menu a {
+    width: 100%;
+    margin: 4px 0;
+    text-align: center;
+    padding: 10px 20px;
+  }
+}
+
+/* Desktop view: keep nav visible, hide hamburger */
+@media (min-width: 769px) {
+  #nav-menu {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  .hamburger {
+    display: none !important;
+  }
+}
+
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tablet styles (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 20px 28px;
+  }
+
+  .hero {
+    padding: 70px 20px 50px;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  .containerNav {
+    font-size: 1rem;
+  }
+
+  .learn-more-container {
+    padding: 25px;
+  }
+
+  .learn-more-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .learn-more-content h3 {
+    font-size: 1.4rem;
+  }
+}
+
+/* Large screen styles (1025px and up) */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 1200px;
+    padding: 32px 40px;
+  }
+
+  .hero {
+    padding: 100px 20px 80px;
+  }
+
+  .hero h1 {
+    font-size: 3.2rem;
+  }
+
+  .hero p {
+    font-size: 1.3rem;
+  }
+
+  .containerNav {
+    font-size: 1.2rem;
+  }
+
+  .learn-more-container {
+    max-width: 900px;
+    padding: 35px;
+  }
+
+  .learn-more-content h2 {
+    font-size: 2.2rem;
+  }
+
+  .learn-more-content h3 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Add background image for body on small screens */
+@media (max-width: 768px) {
+  /* No background-image needed for body on small screens */
+}
+
+/* Custom styles for IntaSend payment buttons */
+.payment-section {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.payment-section .btn {
+  background-color: var(--brand-2);
+  color: #fff;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.payment-section .btn:focus {
+  box-shadow: 0 0 0 3px rgba(0, 194, 168, 0.3);
+  background-color: #00bfae;
+}
+
+.payment-section .btn:hover {
+  background-color: #009e8f;
+}
+
+/* Responsive adjustments for payment buttons */
+@media (max-width: 480px) {
+  .payment-section .btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 14px 0;
+  }
+}

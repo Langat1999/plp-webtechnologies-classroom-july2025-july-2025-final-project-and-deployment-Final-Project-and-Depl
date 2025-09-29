@@ -1,0 +1,16 @@
+{
+  "name": "hackathon-starter",
+  "version": "1.0.0",
+  "description": "Quick start for three beginner-friendly projects with a Flask backend.",
+  "main": "serve-static.js",
+  "scripts": {
+    "start": "node serve-static.js",
+    "dev": "node serve-static.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

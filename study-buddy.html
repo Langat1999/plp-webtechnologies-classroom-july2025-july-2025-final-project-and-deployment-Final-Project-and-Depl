@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Study Buddy</title>
+  
+  <!-- Favicon / App Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/partners.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/partners.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/partners.png" />
+  <meta name="theme-color" content="#111827" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Removed repeated inline styles; all styles are now in style4.css -->
+  <link rel="stylesheet" href="assets/css/style4.css" media="print" onload="this.media='all'">
+  <style>
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      #nav-menu {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      #nav-menu.show {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 10px 0;
+        z-index: 1000;
+      }
+
+      #nav-menu.show a {
+        display: block;
+        padding: 10px 20px;
+        text-align: center;
+      }
+    }
+
+    @media (min-width: 769px) {
+      #nav-menu {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+      }
+
+      .hamburger {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <picture>
+  <source srcset="assets/images/webp/study-optimized.webp" type="image/webp" media="(min-width: 768px)">
+  <source srcset="assets/images/webp/study-optimized.webp" type="image/webp" media="(max-width: 767px)">
+  <img src="assets/images/webp/study-optimized.webp" alt="Study Buddy Background" width="1372" height="912" style="position:fixed; top:0; left:0; width:100vw; height:100vh; object-fit:cover; z-index:-1; opacity:0.3;" loading="eager" decoding="async">
+    </picture>
+
+
+  <header class="site-header">
+    <div class="containerNav">
+      <a class="logo" href="index.html">
+        <img src="assets/images/earth.png"
+          alt="Globe showing continents surrounded by blue oceans, symbolizing global unity and sustainability, set against a simple background with a calm and hopeful tone" width="55" height="55" loading="eager" decoding="async" class="logo-image" src="assets/images/earth-optimized.png" />
+        Sustainable Development Goals
+      </a>
+
+      <!-- Hamburger toggle button -->
+      <button class="hamburger" id="menu-toggle" aria-label="Menu">&#9776;</button>
+
+
+      <nav id="nav-menu" aria-label="Primary Navigation">
+        <a id="nav-home" href="index.html">Home</a>
+        <a id="nav-sdg2" href="recipe-recommender.html">SDG 2</a>
+        <a id="nav-sdg3" href="mood-journal.html">SDG 3</a>
+        <a id="nav-sdg4" href="study-buddy.html">SDG 4</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="tag">SDG 4 — Quality Education</span>
+      <h1>AI Study Buddy — Flashcard Generator</h1>
+      <p class="section-title">Paste notes, generate questions, and save flashcards. Backend calls to Hugging Face or
+        OpenAI can be added later.</p>
+    </section>
+
+
+
+    <section class="card">
+      <div class="form-row">
+        <label for="notes">Study Notes</label>
+        <textarea id="notes" rows="8" placeholder="Paste your notes here..."></textarea>
+      </div>
+      <div class="form-row">
+        <button class="btn alt" id="btn-generate">Generate 5 Flashcards</button>
+      </div>
+      <div class="grid" id="flashcards"></div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; 2025 Jackson Mutiso Langat. All rights reserved.</p>
+        <div class="social-icons">
+          <a href="https://github.com/Langat1999" target="_blank">
+            <picture>
+              <source srcset="assets/images/icons/github.webp" type="image/webp" />
+              <img src="assets/images/icons/github.png" alt="GitHub" width="24" height="24" loading="lazy" />
+            </picture>
+          </a>
+          <a href="https://wa.me/254713809220" target="_blank">
+            <picture>
+              <source srcset="assets/images/icons/whatsapp-optimized.webp" type="image/webp" />
+              <img src="assets/images/icons/whatsapp.png" alt="WhatsApp" width="24" height="24" loading="lazy" />
+            </picture>
+          </a>
+
+          <a href="https://www.linkedin.com/in/jackson-langat-780942243" target="_blank">
+            <picture>
+              <source srcset="assets/images/icons/linkedin.webp" type="image/webp" />
+              <img src="assets/images/icons/linkedin.png" alt="LinkedIn" width="24" height="24" loading="lazy" />
+            </picture>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+    <script src="assets/js/main.js"></script>
+  <!-- Paystack Inline JS SDK -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+    <section class="payment-section" style="margin: 20px 0; text-align: center;">
+  <h3>Support SDG 4 - Quality Education</h3>
+  <button id="study-pay-btn" class="btn">Pay Now (KES 60)</button>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Hamburger menu toggle (preserved)
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        menuToggle.addEventListener('click', () => {
+          navMenu.classList.toggle('show');
+        });
+
+        // Paystack payment integration
+        const payBtn = document.getElementById('study-pay-btn');
+        payBtn.addEventListener('click', async () => {
+          const email = prompt('Please enter your email for payment:');
+          if (!email || !email.includes('@')) {
+            alert('Please enter a valid email address.');
+            return;
+          }
+
+          const button = payBtn;
+          const resetLoading = showLoading(button, 'Processing payment...');
+
+          try {
+            const resp = await fetch('/create-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                amount: 60,
+                email: email,
+                currency: 'KES',
+                description: 'Support SDG 4 - Quality Education'
+              })
+            });
+
+            const data = await resp.json();
+            if (data.payment_url) {
+              window.location.href = data.payment_url;
+            } else {
+              alert(data.error || 'Payment initialization failed.');
+            }
+          } catch (error) {
+            console.error('Payment error:', error);
+            alert('Payment request failed. Please try again.');
+          } finally {
+            resetLoading();
+          }
+        });
+      });
+    </script>
+
+    <script>
+    document.getElementById('btn-generate').addEventListener('click', async () => {
+      const notes = (document.getElementById('notes').value || '').trim();
+      if (!notes) {
+        showError('Please paste some study notes first.');
+        return;
+      }
+      
+      const button = document.getElementById('btn-generate');
+      const container = document.getElementById('flashcards');
+      const resetLoading = showLoading(button, 'Generating flashcards...');
+      container.innerHTML = '';
+      
+      try {
+        const resp = await apiPost('/api/flashcards', { notes });
+        
+        if (resp && Array.isArray(resp.flashcards)) {
+          const list = resp.flashcards;
+          
+          if (list.length === 0) {
+            showError('No flashcards generated from your notes.', container);
+          } else {
+            for (const item of list) {
+              const card = document.createElement('article');
+              card.className = 'card flashcard';
+              card.innerHTML = `
+                <h4>${item.question}</h4>
+                <p class="muted flashcard-answer">${item.answer}</p>
+              `;
+              container.appendChild(card);
+            }
+            
+            // Show success message
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.textContent = `Generated ${list.length} flashcard${list.length !== 1 ? 's' : ''} from your notes!`;
+            successDiv.style.cssText = 'color: #198754; background: #d1e7dd; padding: 10px; border-radius: 4px; margin: 10px 0;';
+            container.prepend(successDiv);
+            setTimeout(() => successDiv.remove(), 3000);
+          }
+        } else {
+          throw new Error('Invalid response from server');
+        }
+      } catch (error) {
+        console.error('Flashcard generation failed:', error);
+        showError(`Failed to generate flashcards: ${error.message}`, container);
+        
+        // Fallback to mock flashcards
+        const list = [
+          { question: 'What is the main idea?', answer: 'Summarize the core concept in one sentence.' },
+          { question: 'List two key terms.', answer: 'Term A, Term B.' },
+          { question: 'Explain why it matters.', answer: 'Provides foundation for topic X.' },
+          { question: 'Give one example.', answer: 'Example relevant to your notes.' },
+          { question: 'Define an important formula.', answer: 'F = m × a' }
+        ];
+        
+        for (const item of list) {
+          const card = document.createElement('article');
+          card.className = 'card flashcard';
+          card.innerHTML = `
+            <h4>${item.question}</h4>
+            <p class="muted flashcard-answer">${item.answer}</p>
+          `;
+          container.appendChild(card);
+        }
+      } finally {
+        resetLoading();
+      }
+    });
+
+    // Add CSS for better styling
+    const style = document.createElement('style');
+    style.textContent = `
+      .error-message, .success-message {
+        padding: 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+        font-weight: 500;
+      }
+      .error-message {
+        color: #dc3545;
+        background: #f8d7da;
+        border: 1px solid #f5c2c7;
+      }
+      .success-message {
+        color: #198754;
+        background: #d1e7dd;
+        border: 1px solid #badbcc;
+      }
+      .flashcard {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+      }
+      .flashcard:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+      .flashcard-answer {
+        color: #6c757d;
+        font-size: 0.9em;
+      }
+    `;
+    document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
+

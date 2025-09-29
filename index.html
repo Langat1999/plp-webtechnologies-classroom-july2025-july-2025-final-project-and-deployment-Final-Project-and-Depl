@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sustainable Development Goals</title>
+  <meta name="description"
+    content="Learn about Sustainable Development Goals with interactive demos: Recipe Recommender (SDG 2), Mood Journal (SDG 3), and AI Study Buddy (SDG 4)." />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sustainable Development Goals – Interactive Demos" />
+  <meta property="og:description"
+    content="Explore SDGs with AI-powered demos: food ideas, mood tracking, and flashcards." />
+  <meta property="og:image" content="assets/images/partners.png" />
+
+  <!-- Favicon / App Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/partners.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/partners.png" />
+  <meta name="theme-color" content="#111827" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Optional: Preload local fonts for faster LCP -->
+  <!-- Inline critical CSS for header, nav, hero -->
+  <style>
+    /* Minimal load-in animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  body, html {
+    color: #f3f4f6;
+    background: linear-gradient(rgba(17,24,39,0.95), rgba(17,24,39,0.95)), url('assets/images/earth.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+    header {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      background: transparent;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .containerNav {
+      max-width: 1080px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      flex-wrap: wrap;
+      padding: 16px 24px;
+      position: relative;
+      z-index: 2;
+      min-width: 0;
+    }
+    .logo-image {
+      width: 40px;
+      height: auto;
+      max-width: 100%;
+      display: block;
+      margin-right: 10px;
+    }
+    .logo {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      background: transparent;
+      white-space: nowrap;
+      flex-shrink: 1;
+      flex: 0 1 auto;
+    }
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 1.1rem;
+        gap: 6px;
+        min-width: 0;
+      }
+      .logo-image {
+        width: 28px;
+        margin-right: 6px;
+      }
+    }
+    .logo {
+      transition: none !important;
+    }
+    .logo:hover {
+      color: inherit !important;
+      text-shadow: none !important;
+      transform: none !important;
+    }
+    main.container {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      padding: 32px 12px 24px 12px;
+      box-sizing: border-box;
+      position: relative;
+      background: transparent;
+      z-index: 1;
+      min-width: 0;
+    }
+    .hero {
+      width: 100%;
+      max-width: 720px;
+      margin: 48px auto 32px auto;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 2px 6px rgba(0,0,0,.7);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 64px 24px 48px 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto 32px auto;
+      color: #f3f4f6;
+      text-align: center;
+      text-shadow: 0 2px 6px rgba(0,0,0,.7);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: rgba(17,24,39,0.7);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      padding: 64px 24px 48px 24px;
+      position: relative;
+    }
+    .site-footer {
+      z-index: 3;
+      position: relative;
+      color: #f9fafb;
+      background: transparent;
+      min-width: 0;
+    }
+    .site-footer .container {
+      position: relative;
+      z-index: 3;
+    }
+    .site-footer .social-icons img {
+      filter: brightness(1.2) drop-shadow(0 2px 6px #000);
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      line-height: 1.1;
+      color: #f9fafb;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .hero p {
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin: 0 0 18px 0;
+      line-height: 1.4;
+      color: #e5e7eb;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .btn {
+      align-self: center;
+      background: linear-gradient(90deg, #3b82f6 0%, #6366f1 100%);
+      color: #f9fafb;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 12px;
+      box-shadow: 0 2px 8px rgba(59,130,246,0.18);
+      border: none;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #6366f1 0%, #3b82f6 100%);
+      color: #fff;
+    }
+    .learn-more-container {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.18);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 32px 20px;
+      text-align: left;
+    }
+    .learn-more-content ul {
+      padding-left: 20px;
+      margin: 0 0 16px 0;
+    }
+    .site-footer {
+      width: 100%;
+      background: inherit;
+      border-radius: 0;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+      padding: 24px 0 12px 0;
+      margin-top: 32px;
+    }
+    .site-footer .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .social-icons {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .social-icons img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .social-icons a:hover img {
+      transform: scale(1.15);
+      filter: brightness(0) invert(60%) sepia(100%) saturate(500%) hue-rotate(130deg);
+    }
+    @media (max-width: 768px) {
+      .hero p { font-size: 1rem; }
+      .containerNav { padding: 10px 8px; }
+      main.container { padding: 16px 4px 12px 4px; }
+      .hero { padding: 36px 8px 24px 8px; }
+      .learn-more-container { padding: 18px 6px; }
+    }
+    @media (max-width: 480px) {
+      .hero p { font-size: .9rem; }
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/style.css" media="print" onload="this.media='all'">
+
+  <style>
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      #nav-menu {
+        display: none !important;
+      }
+      .hamburger {
+        display: block;
+      }
+      #nav-menu.show {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 10px 0;
+        z-index: 1000;
+      }
+      #nav-menu.show a {
+        display: block;
+        padding: 10px 20px;
+        text-align: center;
+      }
+    }
+
+    @media (min-width: 769px) {
+      #nav-menu {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+      }
+
+      .hamburger {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <picture>
+    <source srcset="assets/images/webp/fallback.webp" type="image/webp" />
+    <img src="assets/images/fallback.jpg" alt="Earth background" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1;" loading="lazy">
+  </picture>
+  <header>
+    <div class="containerNav">
+      <a class="logo" href="index.html">
+        <picture>
+          <source srcset="assets/images/earth-optimized.webp" type="image/webp" />
+          <img src="assets/images/earth-optimized.webp" width="40" height="40" loading="eager" decoding="async" fetchpriority="high"
+            alt="Globe showing continents surrounded by blue oceans, symbolizing global unity and sustainability, set against a simple background with a calm and hopeful tone"
+            class="logo-image" />
+        </picture>
+        Solutions
+      </a>
+      <!-- Hamburger toggle button -->
+      <button class="hamburger" id="menu-toggle" aria-label="Menu">&#9776;</button>
+      <nav id="nav-menu" aria-label="Primary Navigation">
+        <a id="nav-home" href="index.html">Home</a>
+        <a id="nav-sdg2" href="recipe-recommender.html">SDG 2</a>
+        <a id="nav-sdg3" href="mood-journal.html">SDG 3</a>
+        <a id="nav-sdg4" href="study-buddy.html">SDG 4</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <h1>Welcome to Sustainable Development Goals</h1>
+      <p>Join us in making the world a better place through AI Integration...</p>
+      <button id="learn-more-btn" class="btn" aria-expanded="false" aria-controls="learn-more-content" aria-label="Learn more about Sustainable Development Goals">
+        Learn More ⌄
+      </button>
+    </section>
+
+    <!-- Hidden container with descriptive text -->
+    <section id="learn-more-content" class="learn-more-container" aria-hidden="true" style="display: none;">
+      <div class="learn-more-content">
+        <h2>About Sustainable Development Goals</h2>
+        <p>The Sustainable Development Goals (SDGs) are a collection of 17 interlinked global goals designed to be a
+          "blueprint to achieve a better and more sustainable future for all." They were set up in 2015 by the United
+          Nations General Assembly and are intended to be achieved by 2030.</p>
+
+        <h3>Our Interactive Demos:</h3>
+        <ul>
+          <li><strong>SDG 2 - Zero Hunger:</strong> Recipe Recommender helps reduce food waste and promote sustainable
+            eating</li>
+          <li><strong>SDG 3 - Good Health and Well-being:</strong> Mood Journal supports mental health tracking and
+            awareness</li>
+          <li><strong>SDG 4 - Quality Education:</strong> AI Study Buddy enhances learning through personalized
+            flashcards</li>
+        </ul>
+
+        <p>Each demo showcases how AI technology can contribute to achieving these important global goals through
+          practical, accessible tools.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+  <div class="container">
+      <p>&copy; 2025 Jackson Mutiso Langat. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="https://github.com/Langat1999" target="_blank" aria-label="GitHub profile">
+          <picture>
+            <source srcset="assets/images/icons/github.webp" type="image/webp" />
+            <img src="assets/images/icons/github.png" alt="GitHub logo" width="24" height="24" loading="lazy" />
+          </picture>
+        </a>
+        <a href="https://wa.me/254713809220" target="_blank" aria-label="WhatsApp contact">
+          <picture>
+            <source srcset="assets/images/icons/whatsapp-optimized.webp" type="image/webp" />
+            <img src="assets/images/icons/whatsapp-optimized.webp" alt="WhatsApp logo" width="24" height="24" loading="lazy" />
+          </picture>
+        </a>
+
+        <a href="https://www.linkedin.com/in/jackson-langat-780942243" target="_blank" aria-label="LinkedIn profile">
+          <picture>
+            <source srcset="assets/images/icons/linkedin.webp" type="image/webp" />
+            <img src="assets/images/icons/linkedin.png" alt="LinkedIn logo" width="24" height="24" loading="lazy" />
+          </picture>
+        </a>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/menu-toggle.js" defer></script>
+</body>
+
+</html>

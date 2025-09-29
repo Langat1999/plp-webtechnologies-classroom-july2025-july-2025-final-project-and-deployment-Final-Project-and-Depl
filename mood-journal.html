@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mood Journal</title>
+  
+  <!-- Favicon / App Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/partners.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/partners.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/partners.png" />
+  <meta name="theme-color" content="#111827" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      position: relative;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      background: transparent;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .containerNav {
+      position: relative;
+      max-width: 1080px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      flex-wrap: wrap;
+      padding: 16px 24px;
+    }
+    .logo-image {
+      width: 40px;
+      height: 40px;
+      display: block;
+      margin-right: 10px;
+    }
+    main.container {
+      position: relative;
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      padding: 32px 12px 24px 12px;
+      box-sizing: border-box;
+    }
+    .hero {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto 32px auto;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 2px 6px rgba(0,0,0,.7);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 64px 24px 48px 24px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      line-height: 1.1;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin: 0 0 18px 0;
+      line-height: 1.4;
+      color: #eee;
+    }
+    .btn {
+      align-self: center;
+      background-color: #3b82f6;
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 12px;
+      box-shadow: 0 2px 8px rgba(59,130,246,0.10);
+      border: none;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #2563eb;
+    }
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto 24px auto;
+      background: rgba(0,0,0,0.18);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 32px 20px;
+      text-align: left;
+    }
+    .site-footer {
+      position: relative;
+      width: 100%;
+      background: rgba(0,0,0,0.18);
+      border-radius: 0;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+      padding: 24px 0 12px 0;
+      margin-top: 32px;
+    }
+    .site-footer .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .social-icons {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .social-icons img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .social-icons a:hover img {
+      transform: scale(1.15);
+      filter: brightness(0) invert(60%) sepia(100%) saturate(500%) hue-rotate(130deg);
+    }
+    @media (max-width: 768px) {
+      .hero p { font-size: 1rem; }
+      .containerNav { padding: 10px 8px; }
+      main.container { padding: 16px 4px 12px 4px; }
+      .hero { padding: 36px 8px 24px 8px; }
+      .card { padding: 18px 6px; }
+    }
+    @media (max-width: 480px) {
+      .hero p { font-size: .9rem; }
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/style3.css" media="print" onload="this.media='all'">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      #nav-menu {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      #nav-menu.show {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 10px 0;
+        z-index: 1000;
+      }
+
+      #nav-menu.show a {
+        display: block;
+        padding: 10px 20px;
+        text-align: center;
+      }
+    }
+
+    @media (min-width: 769px) {
+      #nav-menu {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+      }
+
+      .hamburger {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <picture>
+  <source srcset="assets/images/webp/mood-optimized.webp" type="image/webp" media="(min-width: 768px)">
+  <source srcset="assets/images/webp/mood-optimized.webp" type="image/webp" media="(max-width: 767px)">
+  <img src="assets/images/webp/mood-optimized.webp" alt="Mood Journal Background" style="position:fixed; top:0; left:0; width:100vw; height:100vh; object-fit:cover; z-index:-1; opacity:0.3;">
+  </picture>
+  <header>
+    <div class="containerNav">
+      <a class="logo" href="index.html">
+        <img src="assets/images/earth.png"
+    alt="Globe showing continents surrounded by blue oceans, symbolizing global unity and sustainability, set against a simple background with a calm and hopeful tone" width="40" height="40" loading="eager" decoding="async" class="logo-image" src="assets/images/earth-optimized.png" />
+        Solutions
+      </a>
+      <!-- Hamburger toggle button -->
+      <button class="hamburger" id="menu-toggle" aria-label="Menu">&#9776;</button>
+      <nav id="nav-menu" aria-label="Primary Navigation">
+        <a id="nav-home" href="index.html">Home</a>
+        <a id="nav-sdg2" href="recipe-recommender.html">SDG 2</a>
+        <a id="nav-sdg3" href="mood-journal.html">SDG 3</a>
+        <a id="nav-sdg4" href="study-buddy.html">SDG 4</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="tag">SDG 3 — Good Health & Well‑Being</span>
+      <h1>Mood Journal — AI‑Powered Emotion Tracker</h1>
+      <p class="section-title">Write entries, analyze sentiment via API, visualize trends with Chart.js.</p>
+    </section>
+
+
+
+    <section class="card">
+      <div class="form-row">
+        <label for="entry">Today’s Entry</label>
+        <textarea id="entry" rows="5" placeholder="I felt ... because ..."></textarea>
+      </div>
+      <div class="form-row">
+        <button class="btn" id="analyze">Analyze Sentiment</button>
+      </div>
+      <div class="form-row">
+        <canvas id="moodChart" class="chart-box"></canvas>
+      </div>
+    </section>
+
+<footer class="site-footer">
+      <div class="container">
+        <p>&copy; 2025 Jackson Mutiso Langat. All rights reserved.</p>
+        <div class="social-icons">
+          <a href="https://github.com/Langat1999" target="_blank">
+            <picture>
+              <source srcset="assets/images/icons/github.webp" type="image/webp" />
+              <img src="assets/images/icons/github.png" alt="GitHub" width="24" height="24" loading="lazy" />
+            </picture>
+          </a>
+          <a href="https://wa.me/254713809220" target="_blank">
+            <picture>
+              <source srcset="assets/images/icons/whatsapp-optimized.webp" type="image/webp" />
+              <img src="assets/images/icons/whatsapp.png" alt="WhatsApp" width="24" height="24" loading="lazy" />
+            </picture>
+          </a>
+
+          <a href="https://www.linkedin.com/in/jackson-langat-780942243" target="_blank">
+            <picture>
+              <source srcset="assets/images/icons/linkedin.webp" type="image/webp" />
+              <img src="assets/images/icons/linkedin.png" alt="LinkedIn" width="24" height="24" loading="lazy" />
+            </picture>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+
+  <section class="payment-section" style="margin: 20px 0; text-align: center;">
+    <h3>Support SDG 3 - Good Health & Well-being</h3>
+    <button id="mood-pay-btn" class="btn">Pay Now (KES 75)</button>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Hamburger menu toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const navMenu = document.getElementById('nav-menu');
+      menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('show');
+      });
+
+      // Paystack payment integration
+      const payBtn = document.getElementById('mood-pay-btn');
+      payBtn.addEventListener('click', async () => {
+        const email = prompt('Please enter your email for payment:');
+        if (!email || !email.includes('@')) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+
+        const button = payBtn;
+        const resetLoading = showLoading(button, 'Processing payment...');
+
+        try {
+          const resp = await fetch('/create-payment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              amount: 75,
+              email: email,
+              currency: 'KES',
+              description: 'Support SDG 3 - Good Health & Well-being'
+            })
+          });
+
+          const data = await resp.json();
+          if (data.payment_url) {
+            window.location.href = data.payment_url;
+          } else {
+            alert(data.error || 'Payment initialization failed.');
+          }
+        } catch (error) {
+          console.error('Payment error:', error);
+          alert('Payment request failed. Please try again.');
+        } finally {
+          resetLoading();
+        }
+      });
+    });
+  </script>
+
+  <script>
+    const ctx = document.getElementById('moodChart');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: { labels: [], datasets: [{ label: 'Happiness %', data: [], borderColor: '#00c2a8', backgroundColor: 'rgba(0,194,168,.15)', fill: true, tension: .3 }] },
+      options: { scales: { y: { min: 0, max: 100 } } }
+    });
+
+    document.getElementById('analyze').addEventListener('click', async () => {
+      const text = (document.getElementById('entry').value || '').trim();
+      if (!text) {
+        showError('Please write a short entry first.');
+        return;
+      }
+      
+      const button = document.getElementById('analyze');
+      const resetLoading = showLoading(button, 'Analyzing...');
+      
+      try {
+        const resp = await apiPost('/api/sentiment', { text });
+        
+        if (resp && typeof resp.score === 'number') {
+          const score = resp.score;
+          const label = new Date().toLocaleDateString();
+          chart.data.labels.push(label);
+          chart.data.datasets[0].data.push(score);
+          chart.update();
+          
+          // Show success feedback
+          const successDiv = document.createElement('div');
+          successDiv.className = 'success-message';
+          successDiv.textContent = `Sentiment analyzed successfully! Score: ${score}/100`;
+          successDiv.style.cssText = 'color: #198754; background: #d1e7dd; padding: 10px; border-radius: 4px; margin: 10px 0;';
+          document.querySelector('.card').prepend(successDiv);
+          setTimeout(() => successDiv.remove(), 3000);
+          
+          // Clear the textarea after successful analysis
+          document.getElementById('entry').value = '';
+        } else {
+          throw new Error('Invalid response from server');
+        }
+      } catch (error) {
+        console.error('Sentiment analysis failed:', error);
+        showError(`Failed to analyze sentiment: ${error.message}`, document.querySelector('.card'));
+        
+        // Fallback to mock data if API fails
+        const score = Math.min(100, Math.max(0, 50 + Math.round((Math.random() - 0.5) * 40)));
+        const label = new Date().toLocaleDateString();
+        chart.data.labels.push(label);
+        chart.data.datasets[0].data.push(score);
+        chart.update();
+      } finally {
+        resetLoading();
+      }
+    });
+
+    // Add CSS for better error/success styling
+    const style = document.createElement('style');
+    style.textContent = `
+      .error-message, .success-message {
+        padding: 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+        font-weight: 500;
+      }
+      .error-message {
+        color: #dc3545;
+        background: #f8d7da;
+        border: 1px solid #f5c2c7;
+      }
+      .success-message {
+        color: #198754;
+        background: #d1e7dd;
+        border: 1px solid #badbcc;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+
+</html>
+

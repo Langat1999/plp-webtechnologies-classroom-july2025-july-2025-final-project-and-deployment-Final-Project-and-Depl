@@ -1,0 +1,15 @@
+Copy to .env and fill values
+
+Database
+For MySQL use format: mysql+pymysql://USER:PASSWORD@HOST:PORT/DBNAME
+MYSQL_URL=
+
+Hugging Face (https://huggingface.co/settings/tokens)
+HUGGINGFACE_TOKEN=
+HUGGINGFACE_MODEL_URL=https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment
+
+OpenAI (https://platform.openai.com/api-keys)
+OPENAI_API_KEY=
+OPENAI_CHAT_URL=https://api.openai.com/v1/chat/completions
+OPENAI_MODEL=gpt-4o-mini
+
